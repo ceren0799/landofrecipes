@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Land of Recipes</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Land of Recipes</h1>
+        <nav>
+            <ul>
+                <li><a href="#" id="all">Ana Menü</a></li>
+                <li><a href="#" id="beef">Beef</a></li>
+                <li><a href="#" id="chicken">Chicken</a></li>
+                <li><a href="#" id="dessert">Dessert</a></li>
+                <li><a href="#" id="vegetarian">Vegetarian</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id="recipe-container"></main>
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        loadRecipes('all'); // sayfa ilk açıldığında tüm tarifler yüklenir
+
+        $('nav a').click(function(e) {
+            e.preventDefault();
+            let category = $(this).attr('id');
+            loadRecipes(category);
+        });
+        function loadRecipes(category) {
+
+            $('#recipe-container').empty(); // önceki tarifleri temizle
+
+            $.ajax({
+                url: `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`,
+                type: 'GET',
+                success: function(data) {
+                    $.each(data.meals.slice(0, 10), function(i, meal) { // sadece ilk 10 tarifi göster
+                        let recipeHTML = `
+                            <div class="recipe">
+                                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                                <h2>${meal.strMeal}</h2>
+                                <a href="#" class="btn" data-mealid="${meal.idMeal}">View Recipe</a>
+                            </div>
+                        `;
+                        $('#recipe-container').append(recipeHTML);
+                    });
+                    
+                    // Tarifleri yükledikten sonra, "View Recipe" butonlarına click event listener'ı ekle
+                    $('.recipe a').click(function(e) {
+                        e.preventDefault();
+                        let mealId = $(this).data('mealid');
+                        getRecipeDetails(mealId);
+                    });
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+            }
+
+        function getRecipeDetails(mealId) {
+            $.ajax({
+                url: `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`,
+                type: 'GET',
+                success: function(data) {
+                    let recipe = data.meals[0];
+                    let recipeHTML = `
+                        <div class="recipe-details">
+                            <h2>${recipe.strMeal}</h2>
+                            <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
+                            <h3>Ingredients</h3>
+                            <ul>
+                    `;
+                    for (let i = 1; i <= 20; i++) {
+                        let ingredient = recipe[`strIngredient${i}`];
+                        let measurement = recipe[`strMeasure${i}`];
+                        if (ingredient !== '' && ingredient !== null) {
+                            recipeHTML += `
+                                <li>${measurement} ${ingredient}</li>
+                            `;
+                        }
+                    }
+                    recipeHTML += `
+                            </ul>
+                            <h4>Recipe</h4>
+                            <p>${recipe.strInstructions}</p>
+                        </div>
+                    `;
+                    $('#recipe-container').html(recipeHTML);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+    });
+</script>

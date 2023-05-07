@@ -1,0 +1,110 @@
+body {
+    background-color: #F2EFC7;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header { 
+    background-size: cover;
+    background-color: #355834;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin: 0 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    padding: 20px;
+}
+.recipe {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px #ccc;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    }
+    .recipe:hover {
+    transform: scale(1.05);
+}
+
+.recipe-details img {
+    margin-right: 5px;
+    max-width: 30%;
+    justify-content: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    object-fit:cover;
+}
+
+.recipe-details h2 { /*ana başlık için*/
+    font-size: 40px;
+    color: #333;
+    display: flex;
+    justify-content: center;
+  }
+  
+.recipe-details h3 { /*alt başlık için*/
+  font-size: 36px;
+  color: #333;
+  margin-left: 600px;
+  margin-top: -500px;
+
+    }
+
+.recipe-details ul { /*malzeme listesi */
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    display: flex;
+    list-style-type: none;
+    background-color: #c0c43ca3;
+    padding: 10px;
+    box-shadow: 5px 5px 5px rgb(134, 133, 133);
+    margin-left: 600px;
+    border-radius: 10px 10px 10px 10px;
+    
+
+}
+
+h4 { /*tarif kısmı başlık */
+    font-size: 34px;
+    color: #333;
+    margin-left: 600px;
+
+}    
+
+p{
+    margin-left: 600px;
+    
+}
