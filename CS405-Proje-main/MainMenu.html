@@ -5,6 +5,7 @@
     <title>Land of Recipes</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -25,3 +26,86 @@
     <script src="script.js"></script>
 </body>
 </html>
+<script>
+        // TheMealDB API'den resimleri ve ayrıntıları çekmek için AJAX kullanımı
+        function fetchImages() {
+            var gallery = document.getElementById('gallery');
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'https://www.themealdb.com/api/json/v1/1/filter.php?c=beef', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var meals = response.meals;
+
+                    createGallery(meals);
+                }
+            };
+            xhr.send();
+        }
+
+        // Galeri oluşturma fonksiyonu
+        function createGallery(meals) {
+            var gallery = document.getElementById('gallery');
+
+            for (var i = 0; i < meals.length; i++) {
+                var meal = meals[i];
+
+                var galleryItem = document.createElement('div');
+                galleryItem.classList.add('gallery-item');
+
+                var img = document.createElement('img');
+                img.src = meal.strMealThumb;
+                img.alt = meal.strMeal;
+                img.addEventListener('click', function(meal) {
+                    return function() {
+                        showRecipeDetails(meal);
+                    };
+                }(meal));
+
+                galleryItem.appendChild(img);
+                gallery.appendChild(galleryItem);
+            }
+        }
+
+        // Tarif ayrıntılarını gösterme fonksiyonu
+        function showRecipeDetails(meal) {
+            var recipeDetails = document.getElementById('recipe-details');
+
+            // Tarif ayrıntılarını oluşturma
+            var recipeHTML = `
+                <h2>${meal.strMeal}</h2>
+                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+                <h3>Ingredients</h3>
+                <ul>
+            `;
+            for (var i = 1; i <= 20; i++) {
+                var ingredient = meal['strIngredient' + i];
+                var measurement = meal['strMeasure' + i];
+                if (ingredient && ingredient !== '' && measurement && measurement !== '') {
+                    recipeHTML += `
+                        <li>${measurement} ${ingredient}</li>
+                    `;
+                }
+            }
+            recipeHTML += `
+                </ul>
+                <h4>Instructions</h4>
+                <p>${meal.strInstructions}</p>
+            `;
+
+            // Tarif ayrıntılarını popup penceresine yerleştirme
+            recipeDetails.innerHTML = recipeHTML;
+            recipeDetails.style.display = 'block';
+
+        // Popup penceresinin dışına tıklandığında kapatılmasını sağlama
+        window.onclick = function(event) {
+            if (event.target === recipeDetails) {
+                recipeDetails.style.display = 'none';
+            }
+        };
+    }
+
+    // Galeri oluşturma işlemini başlat
+    fetchImages();
+    </script>

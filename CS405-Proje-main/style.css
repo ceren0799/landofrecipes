@@ -1,13 +1,16 @@
+h1{
+    font-family:'Lobster';
+    font-weight:lighter;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e5fbed;
 }
 
 header {
-    background-color: #2A4D14;
-    color: #fff;
+    color:black;
     padding: 20px;
     display: flex;
     justify-content: space-between;
@@ -29,7 +32,7 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color:black;
     text-decoration: none;
     padding: 5px;
     border-radius: 5px;
@@ -57,42 +60,29 @@ nav ul li a {
 
 }
 
-.recipe h2 {
-    margin: 10px;
-}
-
 .recipe a.btn {
     display: block;
     padding: 10px;
     text-align: center;
-    background-color: #317B22;
 }
 h5{
     text-align: center;
-    font-size: 24px;
-    color: #354f30;
-    font-weight: bold;
+    font-size: 32px;
+    color: #509E2F;
 }
 nav ul li a.active {
-    background-color: #317B22;
-    color: #fff;
+    color:#509E2F;
 }
 .recipe-details ul { /*malzeme listesi */
     font-size: 18px;
     color: rgb(0, 0, 0);
-    text-align: center;
-    display: flex;
-    list-style-type: none;
     padding: 10px;
-    box-shadow: 5px 5px 5px rgb(134, 133, 133);
     border-radius: 10px 10px 10px 10px;
+    flex-direction: column;
 }
 .recipe-details img {
-    margin-right: 5px;
-    max-width: 30%;
-    justify-content: flex;
-    flex-direction: column;
+    display: flex;
     align-items: center;
-    text-align: center;
-    object-fit:cover;
+    max-width: 500px;
+
 }

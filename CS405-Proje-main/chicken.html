@@ -5,6 +5,7 @@
     <title>Land of Recipes</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -32,7 +33,7 @@
                 url: `https://www.themealdb.com/api/json/v1/1/filter.php?c=chicken`,
                 type: 'GET',
                 success: function(data) {
-                    $.each(data.meals.slice(0, 20), function(i, meal) { // sadece ilk 10 tarifi göster
+                    $.each(data.meals.slice(0, 20), function(i, meal) { // sadece ilk 20 tarifi göster
                         let recipeHTML = `
                             <div class="recipe">
                                 <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
