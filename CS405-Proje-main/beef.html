@@ -84,7 +84,7 @@
                     recipeHTML += `
                             </ul>
                             <h4>Recipe</h4>
-                            <p>${recipe.strInstructions}</p>
+                            <p>${recipe.strInstructions.replace(/\n/g, '<br>')}</p>
                         </div>
                     `;
                     $('#recipe-container').html(recipeHTML);

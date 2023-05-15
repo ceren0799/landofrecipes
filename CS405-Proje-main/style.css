@@ -22,7 +22,7 @@ h2{
     text-align: center;
 }
 
-nav ul {
+nav ul { /*/ üst menü/*/
     list-style: none;
     display: flex;
 }
