@@ -5,6 +5,7 @@
     <title>Land of Recipes</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -83,7 +84,7 @@
                     recipeHTML += `
                             </ul>
                             <h4>Recipe</h4>
-                            <p>${recipe.strInstructions}</p>
+                            <p>${recipe.strInstructions.replace(/\n/g, '<br>')}</p>
                         </div>
                     `;
                     $('#recipe-container').html(recipeHTML);
