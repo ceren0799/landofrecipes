@@ -19,9 +19,54 @@
             </ul>
         </nav>
     </header>
+    <div class="background-image">
+    </div>
+    
     <main id="recipe-container">
-       
+        <div id="slider-container">
+            <a href="#" class="control_next">>></a>
+            <a href="#" class="control_prev"><<</a>
+                <ul>
+                    <li class="slider-item"><img src="./beef.jpg" alt="Beef">
+                        <a href="beef.html" class="button">Beef</a>
+                    </li>
+                    <li class="slider-item"><img src="./chicken.jpg" alt="Chicken">
+                        <a href="chicken.html" class="button">Chicken</a>
+                    </li>
+                    <li class="slider-item"><img src="./dessert.jpg" alt="Dessert">
+                        <a href="dessert.html" class="button">Dessert</a></li>
+                    <li class="slider-item"><img src="./vegetarian.jpg" alt="Vegetarian">
+                        <a href="vegetarian.html" class="button">Vegetarian</a>
+                    </li>
+                </ul>               
+            </div>
+        </div>     
     </main>
     <script src="script.js"></script>
+    <script>
+document.querySelector(".control_next").addEventListener("click", function() {
+    var container = document.querySelector("#slider-container ul");
+    var firstItem = document.querySelector("#slider-container ul li:first-child");
+    container.style.left = "-25%";
+    container.appendChild(firstItem); 
+    container.style.transition = "none"; 
+    setTimeout(function() {
+        container.style.transition = "left 0.6s"; 
+        container.style.left = "0"; 
+    }, 50);
+});
+
+document.querySelector(".control_prev").addEventListener("click", function() {
+    var container = document.querySelector("#slider-container ul");
+    var lastItem = document.querySelector("#slider-container ul li:last-child");
+    container.style.left = "-25%"; 
+    container.style.transition = "none";
+    container.insertBefore(lastItem, container.firstChild); 
+    setTimeout(function() {
+        container.style.transition = "left 0.6s"; 
+        container.style.left = "0"; 
+    }, 50); 
+});
+    </script>
 </body>
 </html>
