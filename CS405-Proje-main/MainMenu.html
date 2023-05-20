@@ -12,144 +12,87 @@
         <h1>Land of Recipes</h1>
         <nav>
             <ul>
-                <li><a href="MainMenu.html"class="active">Main Menu</a></li>
+                <li><a href="MainMenu.html" class="active">Main Menu</a></li>
                 <li><a href="beef.html">Beef</a></li>
                 <li><a href="chicken.html">Chicken</a></li>
-                <li><a href="dessert.html" >Dessert</a></li>
+                <li><a href="dessert.html">Dessert</a></li>
                 <li><a href="vegetarian.html">Vegetarian</a></li>
             </ul>
         </nav>
     </header>
-    </div>
     
     <main id="recipe-container">
         <div id="slider-container">
             <a href="#" class="control_next">></a>
             <a href="#" class="control_prev"><</a>
-                <ul>
-                    <li class="slider-item"><img src="../images/beef.jpg" alt="Beef">.
-                        <a href="beef.html" class="button">Beef</a>
-                    </li>
-                    <li class="slider-item"><img src="../images/chicken.jpg" alt="Chicken">
-                        <a href="chicken.html" class="button">Chicken</a>
-                    </li>
-                    <li class="slider-item"><img src="../images/dessert.jpg" alt="Dessert">
-                        <a href="dessert.html" class="button">Dessert</a></li>
-                    <li class="slider-item"><img src="../images/vegetarian.jpg" alt="Vegetarian">
-                        <a href="vegetarian.html" class="button">Vegetarian</a>
-                    </li>
-                </ul>               
-            </div>
-        </div>     
+            <ul>
+                <li class="slider-item"><img src="../images/beef.jpg" alt="Et"> <a href="beef.html"></a></li>
+                <li class="slider-item"><img src="../images/chicken.jpg" alt="Tavuk"> <a href="chicken.html" ></a></li>
+                <li class="slider-item"><img src="../images/dessert.jpg" alt="Tatlı"> <a href="dessert.html" ></a></li>
+                <li class="slider-item"><img src="../images/vegetarian.jpg" alt="Vejetaryen"> <a href="vegetarian.html"></a></li>
+            </ul>
+        </div>
     </main>
-    <script src="script.js"></script>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-document.querySelector(".control_next").addEventListener("click", function() {
-    var container = document.querySelector("#slider-container ul");
-    var firstItem = document.querySelector("#slider-container ul li:first-child");
-    container.style.left = "-25%";
-    container.appendChild(firstItem); 
-    container.style.transition = "none"; 
-    setTimeout(function() {
-        container.style.transition = "left 0.6s"; 
-        container.style.left = "0"; 
-    }, 50);
-});
+    // Slider controls
+    document.querySelector(".control_next").addEventListener("click", function() {
+        var container = document.querySelector("#slider-container ul");
+        var firstItem = document.querySelector("#slider-container ul li:first-child");
+        container.style.left = "-25%";
+        container.appendChild(firstItem);
+        container.style.transition = "none";
+        setTimeout(function() {
+            container.style.transition = "left 0.6s";
+            container.style.left = "0";
+        }, 50);
+    });
 
-document.querySelector(".control_prev").addEventListener("click", function() {
-    var container = document.querySelector("#slider-container ul");
-    var lastItem = document.querySelector("#slider-container ul li:last-child");
-    container.style.left = "-25%"; 
-    container.style.transition = "none";
-    container.insertBefore(lastItem, container.firstChild); 
-    setTimeout(function() {
-        container.style.transition = "left 0.6s"; 
-        container.style.left = "0"; 
-    }, 50); 
-});
-    </script>
+    document.querySelector(".control_prev").addEventListener("click", function() {
+        var container = document.querySelector("#slider-container ul");
+        var lastItem = document.querySelector("#slider-container ul li:last-child");
+        container.style.left = "-25%";
+        container.style.transition = "none";
+        container.insertBefore(lastItem, container.firstChild);
+        setTimeout(function() {
+            container.style.transition = "left 0.6s";
+            container.style.left = "0";
+        }, 50);
+    });
+    $(document).ready(function() {
+            loadRecipes('list'); // sayfa ilk açıldığında tüm tarifler yüklenir
+    
+            function loadRecipes(list) {
+                $.ajax({
+                    url: 'https://www.themealdb.com/api/json/v1/1/categories.php',
+                    type: 'GET',
+                    success: function(data) {
+                        $.each(data.categories, function(i, category) { 
+                            let recipeHTML = `
+                                <div class="recipe">
+                                    <h1>${category.strCategory}</h1>
+                                    <img src="${category.strCategoryThumb}" alt="${category.strCategory}">
+                                    <a href="${category.strCategory}" class="btn">Go Category</a>
+                                </div>
+                            `;
+                            $('#recipe-container').append(recipeHTML);
+                        });
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+    
+            // "Go Category" butonlarına click event listener'ı ekle
+            $(document).on('click', '.recipe a.btn', function(e) {
+                e.preventDefault();
+                let categoryUrl = $(this).attr('href');
+                window.location.href = categoryUrl + '.html';
+            });
+        });
+        </script>
 </body>
-</html>
-<script>
-        // TheMealDB API'den resimleri ve ayrıntıları çekmek için AJAX kullanımı
-        function fetchImages() {
-            var gallery = document.getElementById('gallery');
-            var xhr = new XMLHttpRequest();
-
-            xhr.open('GET', 'https://www.themealdb.com/api/json/v1/1/filter.php?c=beef', true);
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var meals = response.meals;
-
-                    createGallery(meals);
-                }
-            };
-            xhr.send();
-        }
-
-        // Galeri oluşturma fonksiyonu
-        function createGallery(meals) {
-            var gallery = document.getElementById('gallery');
-
-            for (var i = 0; i < meals.length; i++) {
-                var meal = meals[i];
-
-                var galleryItem = document.createElement('div');
-                galleryItem.classList.add('gallery-item');
-
-                var img = document.createElement('img');
-                img.src = meal.strMealThumb;
-                img.alt = meal.strMeal;
-                img.addEventListener('click', function(meal) {
-                    return function() {
-                        showRecipeDetails(meal);
-                    };
-                }(meal));
-
-                galleryItem.appendChild(img);
-                gallery.appendChild(galleryItem);
-            }
-        }
-
-        // Tarif ayrıntılarını gösterme fonksiyonu
-        function showRecipeDetails(meal) {
-            var recipeDetails = document.getElementById('recipe-details');
-
-            // Tarif ayrıntılarını oluşturma
-            var recipeHTML = `
-                <h2>${meal.strMeal}</h2>
-                <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
-                <h3>Ingredients</h3>
-                <ul>
-            `;
-            for (var i = 1; i <= 20; i++) {
-                var ingredient = meal['strIngredient' + i];
-                var measurement = meal['strMeasure' + i];
-                if (ingredient && ingredient !== '' && measurement && measurement !== '') {
-                    recipeHTML += `
-                        <li>${measurement} ${ingredient}</li>
-                    `;
-                }
-            }
-            recipeHTML += `
-                </ul>
-                <h4>Instructions</h4>
-                <p>${meal.strInstructions}</p>
-            `;
-
-            // Tarif ayrıntılarını popup penceresine yerleştirme
-            recipeDetails.innerHTML = recipeHTML;
-            recipeDetails.style.display = 'block';
-
-        // Popup penceresinin dışına tıklandığında kapatılmasını sağlama
-        window.onclick = function(event) {
-            if (event.target === recipeDetails) {
-                recipeDetails.style.display = 'none';
-            }
-        };
-    }
-
-    // Galeri oluşturma işlemini başlat
-    fetchImages();
-    </script>
+</html> 

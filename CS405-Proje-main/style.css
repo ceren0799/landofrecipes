@@ -176,22 +176,37 @@ nav ul li a.active {
     position: relative;
 }
 
-#slider-container .slider-item .button {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 999;
-    display: inline-block;
-    padding: 10px 20px;
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: none;
-    text-decoration: none;
-    font-size: 16px;
-    cursor: pointer;
+
+
+.category {
+    text-align: center;
 }
 
-#slider-container .slider-item .button:hover {
-    background-color: rgba(0, 0, 0, 0.9);
+.category img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.category h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.category .btn {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    text-decoration: none;
+}
+
+.category .btn:hover {
+    background-color: #333;
 }
