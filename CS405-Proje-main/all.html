@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Land of Recipes</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Land of Recipes</h1>
+        <nav>
+            <ul>
+                <li><a href="MainMenu.html" class="active">Main Menu</a></li>
+                <li><a href="beef.html">Beef</a></li>
+                <li><a href="chicken.html">Chicken</a></li>
+                <li><a href="dessert.html">Dessert</a></li>
+                <li><a href="vegetarian.html">Vegetarian</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main id="recipe-container">
+    </main>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    //Tüm Kategoriler
+    $(document).ready(function() {
+  loadRecipes('list'); // sayfa ilk açıldığında tüm tarifler yüklenir
+
+  function loadRecipes(list) {
+    $.ajax({
+      url: 'https://www.themealdb.com/api/json/v1/1/categories.php',
+      type: 'GET',
+      success: function(data) {
+        $.each(data.categories, function(i, category) {
+          let recipeHTML = `
+            <div class="recipe">
+              <h2>${category.strCategory}</h2>
+              <img src="${category.strCategoryThumb}" alt="${category.strCategory}">
+              <a href="${category.strCategory}" class="btn">Go Category</a>
+            </div>
+          `;
+          $('#recipe-container').append(recipeHTML);
+        });
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  }
+
+  // "Go Category" butonlarına click event listener'ı ekle
+  $(document).on('click', '.recipe a.btn', function(e) {
+    e.preventDefault();
+    let categoryUrl = $(this).attr('href');
+    window.location.href = categoryUrl + '.html';
+  });
+
+  // "All Categories" başlığına click event listener'ı ekle
+  $(document).on('click', '#all-categories', function(e) {
+    e.preventDefault();
+    window.location.href = 'all.html';
+  });
+});
+        </script>
+</body>
+</html> 

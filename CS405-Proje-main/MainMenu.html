@@ -21,15 +21,35 @@
         </nav>
     </header>
     
-    <main id="recipe-container">
+    <main id="category-container">
         <div id="slider-container">
             <a href="#" class="control_next">></a>
             <a href="#" class="control_prev"><</a>
             <ul>
-                <li class="slider-item"><img src="../images/beef.jpg" alt="Et"> <a href="beef.html"></a></li>
-                <li class="slider-item"><img src="../images/chicken.jpg" alt="Tavuk"> <a href="chicken.html" ></a></li>
-                <li class="slider-item"><img src="../images/dessert.jpg" alt="Tatlı"> <a href="dessert.html" ></a></li>
-                <li class="slider-item"><img src="../images/vegetarian.jpg" alt="Vejetaryen"> <a href="vegetarian.html"></a></li>
+                <li class="slider-item">
+                    <img src="../images/beef.jpg" alt="Et">
+                    <div class="slider-item-content">
+                        <span class="quote">"Yemek, ruhun dilidir."</span>
+                    </div>
+                </li>
+                <li class="slider-item">
+                    <img src="../images/chicken.jpg" alt="Tavuk">
+                    <div class="slider-item-content">
+                        <span class="quote">"Lezzetin tadı damağımda."</span>
+                    </div>
+                </li>
+                <li class="slider-item">
+                    <img src="../images/dessert.jpg" alt="Tatlı">
+                    <div class="slider-item-content">
+                        <span class="quote">"Tatlı mola, mutlu yola."</span>
+                    </div>
+                </li>
+                <li class="slider-item">
+                    <img src="../images/vegetarian.jpg" alt="Vejetaryen">
+                    <div class="slider-item-content">
+                        <span class="quote">"Yeşilin gücü sofrada."</span>
+                    </div>
+                </li>
             </ul>
         </div>
     </main>
@@ -38,6 +58,24 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     // Slider controls
+    $(document).ready(function() {
+    var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        var i;
+        var slides = $(".slider-item");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+        slides[slideIndex - 1].style.display = "block";
+        setTimeout(showSlides, 3000); // 3 saniye aralıklarla slaytları değiştir
+    }
+});
     document.querySelector(".control_next").addEventListener("click", function() {
         var container = document.querySelector("#slider-container ul");
         var firstItem = document.querySelector("#slider-container ul li:first-child");
@@ -61,38 +99,49 @@
             container.style.left = "0";
         }, 50);
     });
+
+    //Tüm Kategoriler
     $(document).ready(function() {
-            loadRecipes('list'); // sayfa ilk açıldığında tüm tarifler yüklenir
-    
-            function loadRecipes(list) {
-                $.ajax({
-                    url: 'https://www.themealdb.com/api/json/v1/1/categories.php',
-                    type: 'GET',
-                    success: function(data) {
-                        $.each(data.categories, function(i, category) { 
-                            let recipeHTML = `
-                                <div class="recipe">
-                                    <h1>${category.strCategory}</h1>
-                                    <img src="${category.strCategoryThumb}" alt="${category.strCategory}">
-                                    <a href="${category.strCategory}" class="btn">Go Category</a>
-                                </div>
-                            `;
-                            $('#recipe-container').append(recipeHTML);
-                        });
-                    },
-                    error: function(error) {
-                        console.log(error);
-                    }
-                });
-            }
-    
-            // "Go Category" butonlarına click event listener'ı ekle
-            $(document).on('click', '.recipe a.btn', function(e) {
-                e.preventDefault();
-                let categoryUrl = $(this).attr('href');
-                window.location.href = categoryUrl + '.html';
-            });
+  loadRecipes('list'); // sayfa ilk açıldığında tüm tarifler yüklenir
+
+  function loadRecipes(list) {
+    $.ajax({
+      url: 'https://www.themealdb.com/api/json/v1/1/categories.php',
+      type: 'GET',
+      success: function(data) {
+        $('#category-container').append('<h7 id="all-categories">All Categories</h7>');
+        $.each(data.categories.slice(0, 5), function(i, category) {
+          let recipeHTML = `
+            <div class="category">
+              <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="${category.strCategory}">
+              <h2>${category.strCategory}</h2>
+              <a href="${category.strCategory}" class="btn">Go</a>
+            </div>
+          `;
+          $('#category-container').append(recipeHTML);
         });
+      },
+      error: function(error) {
+        console.log(error);
+      }
+    });
+  }
+
+  // "Go Category" butonlarına click event listener'ı ekle
+  $(document).on('click', '.category a.btn', function(e) {
+    e.preventDefault();
+    let categoryUrl = $(this).attr('href');
+    window.location.href = categoryUrl + '.html';
+  });
+
+  // "All Categories" başlığına click event listener'ı ekle
+  $(document).on('click', '#all-categories', function(e) {
+    e.preventDefault();
+    window.location.href = 'all.html';
+  });
+});
         </script>
+
+        
 </body>
 </html> 

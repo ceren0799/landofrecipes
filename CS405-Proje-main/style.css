@@ -1,8 +1,9 @@
 h1{
-    font-size: 2.5em;
+    font-size: 60px;
     font-family:'Lobster';
     font-weight:lighter;
 }
+
 
 body {
     color:black;
@@ -13,7 +14,6 @@ body {
     background-color: #F5F5F5;
 }
 header ul{
-background-color: #F5F5F5;
 color: black;
 padding: 30px;
 display: flex;
@@ -23,7 +23,20 @@ align-items: center;
 h2{
     font-size: 16px;
     text-align: center;
+    font-family: 'Lobster';
+    font-weight:lighter;
 }
+h7{
+    text-align: center;
+  font-size: 24px;
+  color: black;
+  font-family: 'Lobster';
+  font-weight: lighter;
+  position:absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  }
 
 nav ul { /*/ üst menü/*/
     list-style: none;
@@ -48,6 +61,7 @@ nav ul li a {
     justify-content: center;
     align-items: flex-start;
     padding: 20px;
+    position: flex;
 }
 
 .recipe {
@@ -72,53 +86,67 @@ nav ul li a {
 }
 h5{
     text-align: center;
-    font-size: 24px;
+    font-size: 36px;
     color: black;
+    font-family: 'Lobster';
     font-weight: lighter;
     
 }
 nav ul li a.active {
-    background-color: #F5F5F5;
     color: black;
 }
-.recipe-details{
-    box-shadow: 5px 5px 5px rgb(83, 82, 82);
+.recipe-details {
+    position: relative;
     border-radius: 10px;
-    background-color: #CCCCCC;
-}
+  }
 .recipe-details h5 {
     margin-top: 0;
 }
-.recipe-details ul { /*malzeme listesi */
+.recipe-details ul {
     font-size: 18px;
-    background-color: #CCCCCC;
+    width: 50%;
     color: rgb(0, 0, 0);
-    box-shadow: 5px 5px 5px #7F7F7F;
-    border-radius: 10px 10px 10px 10px;
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 10px;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-.recipe-details li{
-    flex-basis: 50%;
-    list-style: none;
-}
+    border-radius: 10px;
+    text-align: left;
+    display: flow-root;
+    margin-left: 10%;
+  }
+.recipe-details ul li {
+    width: 50%;
+
+  }
+
+
 .recipe-details h4 {
     margin-top: 10px;
     margin-bottom: 5px;
-}
+    text-align: left;
+    font-size: large;
+    margin-left: 10%;
+  }
 
 .recipe-details p {
     margin-top: 0;
-}
+    max-width: 40%;
+    text-align: left;
+    margin-left: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 .recipe-details img {
-    max-width: 100%;
-    height: 100vh;
-    margin-bottom: 10px;
+    position:absolute;
+    top: 130px;
+    right: 10%;
+    max-width: 70%;
+    height: auto;
+    object-fit: cover;
+    object-position: right;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
 
-}
+
 /*'Ana Menüde ki Slider Css'i'*/
 #slider-container {
     position: relative;
@@ -142,7 +170,8 @@ nav ul li a.active {
 
 #slider-container ul li img {
     width: 100vh;
-    height: 70vh;
+    height: 60vh;
+    position: flex;
 }
 
 #slider-container .control_prev,
@@ -176,10 +205,32 @@ nav ul li a.active {
     position: relative;
 }
 
+#slider-container .slider-item .slider-item-content {
+    position: center;
+    padding-bottom: 100px;
+}
 
-
+#slider-container .slider-item .quote {
+    text-align:left;
+    font-size: 24px;
+    color: black;
+    font-family: 'Lobster';
+    font-weight: lighter;
+    position: absolute;
+    top: 80%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+}
+#category-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    position: relative;
+}
 .category {
-    text-align: center;
+    position: relative;
 }
 
 .category img {
@@ -188,25 +239,26 @@ nav ul li a.active {
     object-fit: cover;
     border-radius: 50%;
     margin-bottom: 10px;
+    position: flex;
+    margin-right: 50px;
 }
 
 .category h2 {
     font-size: 20px;
     margin-bottom: 5px;
+    text-align: center;
+    margin-right: 50px;
 }
 
 .category .btn {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #000;
-    color: #fff;
-    text-align: center;
-    line-height: 40px;
-    text-decoration: none;
+    display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
 }
 
 .category .btn:hover {
-    background-color: #333;
+    display: block;
 }

@@ -69,7 +69,7 @@
                         <div class="recipe-details">
                             <h5>${recipe.strMeal}</h5>
                             <img src="${recipe.strMealThumb}" alt="${recipe.strMeal}">
-                            <h3>Ingredients</h3>
+                            <h4>Ingredients</h4>
                             <ul>
                     `;
                     for (let i = 1; i <= 20; i++) {
@@ -84,7 +84,7 @@
                     recipeHTML += `
                             </ul>
                             <h4>Recipe</h4>
-                            <p>${recipe.strInstructions.replace(/\n/g, '<br>')}</p>
+                            <p>${recipe.strInstructions.replace(/\n/, '<br><br>')}</p>
                         </div>
                     `;
                     $('#recipe-container').html(recipeHTML);
