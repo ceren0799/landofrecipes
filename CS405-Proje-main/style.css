@@ -132,13 +132,11 @@ nav ul li a.active {
   }
 .recipe-details img {
     position:absolute;
-    top: 130px;
-    right: 10%;
-    max-width: 70%;
-    height: auto;
-    object-fit: cover;
-    object-position: right;
-    border-radius: 10px;
+    top: 0;
+    right: 0;
+    width: 80vh;
+    height: 100vh;
+    border-radius: 50%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
@@ -168,33 +166,6 @@ nav ul li a.active {
     width: 100vh;
     height: 60vh;
     position: flex;
-}
-
-#slider-container .control_prev,
-#slider-container .control_next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 999;
-    display: block;
-    padding: 10px;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-    font-size: 24px;
-}
-
-#slider-container .control_prev:hover,
-#slider-container .control_next:hover {
-    background-color: rgba(0, 0, 0, 0.6);
-}
-
-#slider-container .control_prev {
-    left: 10px;
-}
-
-#slider-container .control_next {
-    right: 10px;
 }
 
 #slider-container .slider-item {
