@@ -9,14 +9,13 @@
 </head>
 <body>
     <header>
-        <h1>Land of Recipes</h1>
+        <div class="category">
+        <h1><a href="MainMenu" class="btn">Land of Recipes</a></h1>
+    </div>
         <nav>
             <ul>
                 <li><a href="MainMenu.html" class="active">Main Menu</a></li>
-                <li><a href="beef.html">Beef</a></li>
-                <li><a href="chicken.html">Chicken</a></li>
-                <li><a href="dessert.html">Dessert</a></li>
-                <li><a href="vegetarian.html">Vegetarian</a></li>
+                <li><a href="all.html">All Categories</a></li>
             </ul>
         </nav>
     </header>
@@ -29,25 +28,25 @@
                 <li class="slider-item">
                     <img src="../images/beef.jpg" alt="Et">
                     <div class="slider-item-content">
-                        <span class="quote">"Yemek, ruhun dilidir."</span>
+                        <span class="quote">"Food is the language of the soul."</span>
                     </div>
                 </li>
                 <li class="slider-item">
                     <img src="../images/chicken.jpg" alt="Tavuk">
                     <div class="slider-item-content">
-                        <span class="quote">"Lezzetin tadı damağımda."</span>
+                        <span class="quote">"You must eat to eat, not live to eat."</span>
                     </div>
                 </li>
                 <li class="slider-item">
                     <img src="../images/dessert.jpg" alt="Tatlı">
                     <div class="slider-item-content">
-                        <span class="quote">"Tatlı mola, mutlu yola."</span>
+                        <span class="quote">"Things that are eaten with pleasure and joy are the easiest to digest.- Montaigne"</span>
                     </div>
                 </li>
                 <li class="slider-item">
                     <img src="../images/vegetarian.jpg" alt="Vejetaryen">
                     <div class="slider-item-content">
-                        <span class="quote">"Yeşilin gücü sofrada."</span>
+                        <span class="quote">"When you forget to eat, you know you are alive. - Henry James"</span>
                     </div>
                 </li>
             </ul>
@@ -109,13 +108,12 @@
       url: 'https://www.themealdb.com/api/json/v1/1/categories.php',
       type: 'GET',
       success: function(data) {
-        $('#category-container').append('<h7 id="all-categories">All Categories</h7>');
+        $('#category-container').append('<h6 id="all-categories">Click for All Categories</h6>');
         $.each(data.categories.slice(0, 5), function(i, category) {
           let recipeHTML = `
             <div class="category">
+              <h2><a href="${category.strCategory}" class="btn">${category.strCategory}</a></h2>
               <img src="${category.strCategoryThumb}" alt="${category.strCategory}" onclick="${category.strCategory}">
-              <h2>${category.strCategory}</h2>
-              <a href="${category.strCategory}" class="btn">Go</a>
             </div>
           `;
           $('#category-container').append(recipeHTML);
@@ -144,4 +142,9 @@
 
         
 </body>
+<footer class="footer">
+    <div class="container">
+      <p>CEREN BÜYÜKYÖRÜK 170201009	<br>
+         MUHAMMET FATİH ÖZATA 180201002	</p>
+    </div>
 </html> 

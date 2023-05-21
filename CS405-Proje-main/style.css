@@ -21,22 +21,18 @@ justify-content:center;
 align-items: center;
 }
 h2{
-    font-size: 16px;
+    font-size: 18px;
     text-align: center;
     font-family: 'Lobster';
     font-weight:lighter;
 }
-h7{
-    text-align: center;
-  font-size: 24px;
-  color: black;
-  font-family: 'Lobster';
-  font-weight: lighter;
-  position:absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  }
+h21{
+    font-size: 40px;
+    font-family: 'Lobster';
+    font-weight:100;
+    text-align: left;
+    margin-right: 0;
+}
 
 nav ul { /*/ üst menü/*/
     list-style: none;
@@ -213,11 +209,11 @@ nav ul li a.active {
 #slider-container .slider-item .quote {
     text-align:left;
     font-size: 24px;
-    color: black;
+    color:#7F7F7F;
     font-family: 'Lobster';
     font-weight: lighter;
-    position: absolute;
-    top: 80%;
+    position:flex;
+    top: 100%;
     left: 70%;
     transform: translate(-50%, -50%);
 }
@@ -241,6 +237,7 @@ nav ul li a.active {
     margin-bottom: 10px;
     position: flex;
     margin-right: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .category h2 {
@@ -251,14 +248,40 @@ nav ul li a.active {
 }
 
 .category .btn {
-    display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    color: black;
+    text-decoration:none;
+    display:block;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10%;
 
 }
 
 .category .btn:hover {
     display: block;
 }
+h6{
+    text-align: center;
+    font-size: 24px;
+    color: black;
+    font-family: 'Lobster', cursive;
+    font-weight: lighter;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .footer {
+  position: flex;
+  left: 0;
+  bottom: 0;
+  width: auto;
+  background-color: #CCCCCC;
+  padding: 10px;
+  text-align: center;
+  }
+  
+  .footer p {
+    color: #000000;
+    font-size: 14px;
+    margin: 0;
+    font-weight: bold;
+  }

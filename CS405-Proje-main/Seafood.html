@@ -20,21 +20,23 @@
             </ul>
         </nav>
     </header>
-    <h21>Chicken</h21>
+    <h21>Seafood</h21>
     <main id="recipe-container">
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
 
     $(document).ready(function() {
-        loadRecipes('chicken'); // sayfa ilk açıldığında tüm tarifler yüklenir
+        loadRecipes('Seafood'); // sayfa ilk açıldığında tüm tarifler yüklenir
 
-        function loadRecipes(chicken) {
+        function loadRecipes(Seafood) {
+
+
             $.ajax({
-                url: `https://www.themealdb.com/api/json/v1/1/filter.php?c=chicken`,
+                url: `https://www.themealdb.com/api/json/v1/1/filter.php?c=Seafood`,
                 type: 'GET',
                 success: function(data) {
-                    $.each(data.meals.slice(0, 20), function(i, meal) { // sadece ilk 20 tarifi göster
+                    $.each(data.meals.slice(0, 20), function(i, meal) { // sadece ilk 10 tarifi göster
                         let recipeHTML = `
                             <div class="recipe">
                                 <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
@@ -83,7 +85,8 @@
                     recipeHTML += `
                             </ul>
                             <h4>Recipe</h4>
-                            <p>${recipe.strInstructions.replace(/\n/g, '<br>')}</p>                        </div>
+                            <p>${recipe.strInstructions.replace(/\n/, '<br><br>')}</p>
+                        </div>
                     `;
                     $('#recipe-container').html(recipeHTML);
                 },

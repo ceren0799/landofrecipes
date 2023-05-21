@@ -9,17 +9,18 @@
 </head>
 <body>
     <header>
-        <h1>Land of Recipes</h1>
+        <header>
+            <div class="category">
+                <h1><a href="MainMenu.html" class="btn">Land of Recipes</a></h1>
+        </div>
         <nav>
             <ul>
-                <li><a href="MainMenu.html">Main Menu</a></li>
-                <li><a href="beef.html">Beef</a></li>
-                <li><a href="chicken.html">Chicken</a></li>
-                <li><a href="dessert.html">Dessert</a></li>
-                <li><a href="vegetarian.html" class="active">Vegetarian</a></li>
+                <li><a href="MainMenu.html" class="active">Main Menu</a></li>
+                <li><a href="all.html">All Categories</a></li>
             </ul>
         </nav>
     </header>
+    <h21>Vegetarian</h21>
     <main id="recipe-container">
     </main>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -84,7 +85,8 @@
                     recipeHTML += `
                             </ul>
                             <h4>Recipe</h4>
-                            <p>${recipe.strInstructions.replace(/\n/g, '<br>')}</p>                        </div>
+                            <p>${recipe.strInstructions.replace(/\n/, '<br><br>')}</p>
+                        </div>
                     `;
                     $('#recipe-container').html(recipeHTML);
                 },
@@ -95,3 +97,8 @@
         }
     });
 </script>
+<footer class="footer">
+    <div class="container">
+      <p>CEREN BÜYÜKYÖRÜK 170201009	<br>
+         MUHAMMET FATİH ÖZATA 180201002	</p>
+    </div>
