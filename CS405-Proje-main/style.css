@@ -132,11 +132,10 @@ nav ul li a.active {
   }
 .recipe-details img {
     position:absolute;
-    top: 0;
-    right: 0;
-    width: 80vh;
-    height: 100vh;
-    border-radius: 50%;
+    top: 120px !important;
+    right: 60px;
+    width: 400px !important;
+    height: 400px !important;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
